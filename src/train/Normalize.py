@@ -1,52 +1,43 @@
+import Common
+import Meta
 import os
 
 
-trainRawDataPath = 'data/train/raw/'
-logFileName = 'log.txt'
-
-
-def log(msg):
-    file = open(logFileName, 'a')
-    file.write(msg)
-    file.close()
-
-
-def is_chinese(uchar):
-    if uchar >= u'\u4e00' and uchar <= u'\u9fa5':
-        return True
-    else:
-        return False
-
-
 def normalizePoetry(poetryFileName):
-    log('Normalizing ' + poetryFileName[:-4] + '...\n')
-    poetryFile = open(trainRawDataPath + poetryFileName, 'r', encoding='utf-8')
+    Common.log('Normalizing ' + poetryFileName[:-4] + '...\n')
+    poetryFile = open(Meta.trainRawPath + poetryFileName, 'r', encoding='utf-8')
     raw = poetryFile.read()
     poetryFile.close()
 
-    trainNormalizedDataPath = 'data/train/normalized/'
-    normalizedFile = open(trainNormalizedDataPath + poetryFileName, 'w', encoding='utf-8')
+    normalizedFile = open(Meta.trainNormalizedPath + poetryFileName, 'w', encoding='utf-8')
     inRemark = False
+    lastChar = None
     for char in raw:
         if inRemark:
             if ')' == char or '）' == char or '】' == char:
                 inRemark = False
             continue
 
-        if is_chinese(char):
+        if Common.isChinese(char):
             normalizedFile.write(char)
         elif '(' == char or '（' == char or '【' == char:
             inRemark = True
         else:
-            normalizedFile.write('\n')
+            if Common.isChinese(lastChar):
+                normalizedFile.write('\n')
+        
+        lastChar = char
     normalizedFile.close()
 
 
-try:
-    os.remove(logFileName)
-except OSError:
-    pass
+def cleanOldData():
+    allFiles = os.listdir(Meta.trainNormalizedPath)
+    for file in allFiles:
+        os.remove(Meta.trainNormalizedPath + file)
 
-allRawPoetries = os.listdir(trainRawDataPath)
+
+Common.cleanLog()
+cleanOldData()
+allRawPoetries = os.listdir(Meta.trainRawPath)
 for rawPoetry in allRawPoetries:
     normalizePoetry(rawPoetry)

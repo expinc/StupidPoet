@@ -1,30 +1,18 @@
+import Common
+import Meta
 import os
 import random
 import requests
 from bs4 import BeautifulSoup
 
 
-trainRawDataPath = 'data/train/raw/'
-logFileName = 'log.txt'
-
-
-def log(msg):
-    file = open(logFileName, 'a')
-    file.write(msg)
-    file.close()
-
-
-def is_chinese(uchar):
-    if uchar >= u'\u4e00' and uchar <= u'\u9fa5':
-        return True
-    else:
-        return False
+Meta.trainRawPath = 'data/train/raw/'
 
 
 def remainChinese(str):
     result = u''
     for char in str:
-        if (is_chinese(char)):
+        if (Common.isChinese(char)):
             result += char
     return result
 
@@ -39,7 +27,7 @@ def getAllPoetries(url):
     for poetry in poetries:
         titleStr = poetry.select('p:nth-child(2) > a > b')[0].text
         titleStr = remainChinese(titleStr)
-        log('extracting poetry ' + titleStr + '...\n')
+        Common.log('extracting poetry ' + titleStr + '...\n')
         body = poetry.select('.contson')[0]
         bodyStr = ''
 
@@ -52,7 +40,7 @@ def getAllPoetries(url):
         if '' == bodyStr:
             bodyStr = body.text
 
-        file = open(trainRawDataPath + titleStr + '.txt', 'w', encoding = 'utf-8')
+        file = open(Meta.trainRawPath + titleStr + '.txt', 'w', encoding = 'utf-8')
         file.write(bodyStr)
         file.close()
     
@@ -64,11 +52,7 @@ def getAllPoetries(url):
 
 
 # 古诗文网
-try:
-    os.remove(logFileName)
-except OSError:
-    pass
-
+Common.cleanLog()
 serverUrl = 'https://so.gushiwen.org'
 poetryPath = '/shiwen/'
 mainPageUrl = serverUrl + poetryPath
@@ -78,6 +62,6 @@ content = BeautifulSoup(response.text)
 # 古诗文网 > 诗文 > 类型
 types = content.select('#type1 > div.sright > a')
 for typ in types:
-    log('extracting type ' + typ.text + '...\n')
+    Common.log('extracting type ' + typ.text + '...\n')
     typeUrl = serverUrl + typ.get('href')
     getAllPoetries(typeUrl)
