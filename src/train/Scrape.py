@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-trainDataPath = 'data/train/raw/'
+trainRawDataPath = 'data/train/raw/'
 logFileName = 'log.txt'
 
 
@@ -52,7 +52,7 @@ def getAllPoetries(url):
         if '' == bodyStr:
             bodyStr = body.text
 
-        file = open(trainDataPath + titleStr + '.txt', 'w', encoding = 'utf-8')
+        file = open(trainRawDataPath + titleStr + '.txt', 'w', encoding = 'utf-8')
         file.write(bodyStr)
         file.close()
     
