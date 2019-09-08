@@ -29,18 +29,18 @@ def remainChinese(str):
     return result
 
 
-def getAllPoets(url):
+def getAllPoetries(url):
     response = requests.get(url)
     content = BeautifulSoup(response.text)
-    poetPane = content.select('body > div.main3 > div.left')[0]
-    poets = poetPane.select('.cont')
-    if not poets:
+    poetryPane = content.select('body > div.main3 > div.left')[0]
+    poetries = poetryPane.select('.cont')
+    if not poetries:
         return
-    for poet in poets:
-        titleStr = poet.select('p:nth-child(2) > a > b')[0].text
+    for poetry in poetries:
+        titleStr = poetry.select('p:nth-child(2) > a > b')[0].text
         titleStr = remainChinese(titleStr)
-        log('extracting poet ' + titleStr + '...\n')
-        body = poet.select('.contson')[0]
+        log('extracting poetry ' + titleStr + '...\n')
+        body = poetry.select('.contson')[0]
         bodyStr = ''
 
         # body style 1
@@ -60,7 +60,7 @@ def getAllPoets(url):
     if next is not None:
         nextUrl = next.get('href')
         if nextUrl is not None:
-            getAllPoets(serverUrl + nextUrl)
+            getAllPoetries(serverUrl + nextUrl)
 
 
 # 古诗文网
@@ -70,8 +70,8 @@ except OSError:
     pass
 
 serverUrl = 'https://so.gushiwen.org'
-poetPath = '/shiwen/'
-mainPageUrl = serverUrl + poetPath
+poetryPath = '/shiwen/'
+mainPageUrl = serverUrl + poetryPath
 response = requests.get(mainPageUrl)
 content = BeautifulSoup(response.text)
 
@@ -80,4 +80,4 @@ types = content.select('#type1 > div.sright > a')
 for typ in types:
     log('extracting type ' + typ.text + '...\n')
     typeUrl = serverUrl + typ.get('href')
-    getAllPoets(typeUrl)
+    getAllPoetries(typeUrl)
