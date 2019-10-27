@@ -1,4 +1,7 @@
 set(infra_src
+    ExceptionBase.cpp
+    InfraException.cpp
+    NGram.cpp
     Poetry.cpp
     Sentence.cpp
 )
