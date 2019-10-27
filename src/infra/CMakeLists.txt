@@ -1,5 +1,5 @@
 set(infra_src
-    Poet.cpp
+    Poetry.cpp
     Sentence.cpp
 )
 
