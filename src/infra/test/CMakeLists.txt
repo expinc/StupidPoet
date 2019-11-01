@@ -5,3 +5,11 @@ add_executable(UnitSentence ${UnitSentence_src})
 set_property(TARGET UnitSentence PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded")
 target_link_libraries(UnitSentence gtest.lib)
 target_link_libraries(UnitSentence gtest_main.lib)
+
+set (UnitPoetry_src
+    UnitPoetry.cpp
+)
+add_executable(UnitPoetry ${UnitPoetry_src})
+set_property(TARGET UnitPoetry PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded")
+target_link_libraries(UnitPoetry gtest.lib)
+target_link_libraries(UnitPoetry gtest_main.lib)
