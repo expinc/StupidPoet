@@ -11,5 +11,6 @@ include_directories(
 )
 link_directories(../third-party/google-test/lib)
 
+add_subdirectory(driver)
 add_subdirectory(infra)
 add_subdirectory(model)
