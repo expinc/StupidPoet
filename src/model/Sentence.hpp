@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "UStr.hpp"
+#include "infra/UStr.hpp"
 
 
 namespace StupidPoet

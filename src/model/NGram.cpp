@@ -1,7 +1,7 @@
 #include "NGram.hpp"
 
 
-#include "InfraException.hpp"
+#include "infra/InfraException.hpp"
 
 
 namespace StupidPoet

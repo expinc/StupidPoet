@@ -1,6 +1,6 @@
 ﻿#include <gtest/gtest.h>
 #include <memory>
-#include "infra/Sentence.hpp"
+#include "model/Sentence.hpp"
 
 
 using namespace testing;
