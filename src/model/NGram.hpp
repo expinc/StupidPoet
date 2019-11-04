@@ -15,8 +15,7 @@ namespace StupidPoet
 
     struct NGram
     {
-        UStr            _prefix;
-        UChar           _postfix;
+        UStr            _content;
         unsigned int    _occurance;
         NGramType       _type;
 

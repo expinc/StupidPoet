@@ -7,8 +7,7 @@
 namespace StupidPoet
 {
     NGram::NGram(size_t n, NGramType type) :
-        _prefix(n - 1, u'\0'),
-        _postfix(u'\0'),
+        _content(n, u'\0'),
         _occurance(0),
         _type(type)
     {
@@ -19,11 +18,11 @@ namespace StupidPoet
 
     bool NGram::IsValid() const
     {
-        for (const auto& elem : _prefix)
+        for (const auto& elem : _content)
         {
             if (u'\0' == elem)
                 return false;
         }
-        return u'\0' != _postfix;
+        return true;
     }
 }
