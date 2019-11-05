@@ -20,6 +20,7 @@ namespace StupidPoet
         NGramType       _type;
 
         NGram(const size_t n, const NGramType type);
-        bool IsValid() const;
+        bool    IsValid() const;
+        inline UStr    GetPrefix() const { return _content.substr(0, _content.size() - 1); }
     };
 }

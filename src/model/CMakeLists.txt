@@ -1,4 +1,5 @@
 set(model_src
+    Model.cpp
     NGram.cpp
     Poetry.cpp
     Sentence.cpp

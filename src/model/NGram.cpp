@@ -1,7 +1,7 @@
 #include "NGram.hpp"
 
 
-#include "infra/InfraException.hpp"
+#include "ModelException.hpp"
 
 
 namespace StupidPoet
@@ -12,7 +12,7 @@ namespace StupidPoet
         _type(type)
     {
         if (0 == n)
-            throw InfraException(u"Invalid NGram parameter!");
+            throw ModelException(u"Invalid NGram parameter!");
     }
 
 
