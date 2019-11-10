@@ -11,6 +11,8 @@ include_directories(
 )
 link_directories(../third-party/google-test/lib)
 
+set(CMAKE_CXX_STANDARD 17)
+
 add_subdirectory(driver)
 add_subdirectory(infra)
 add_subdirectory(model)
