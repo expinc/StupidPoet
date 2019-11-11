@@ -13,6 +13,9 @@ namespace StupidPoet
         std::vector<Sentence> _sentences;
 
     public:
+        Poetry() = default;
+        Poetry(const UStr& str){}    // TODO
+
         inline size_t  Size() const  { return _sentences.size(); }
         inline Sentence&    At(const size_t index) { return _sentences[index]; }
         inline Sentence&        operator [](size_t index) { return _sentences[index]; }

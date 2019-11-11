@@ -17,6 +17,7 @@ namespace StupidPoet
         static std::wstring toWStr(const UStr& uStr);
 
         UStr() = default;
-        UStr(const std::basic_string<UChar>& other) : std::basic_string<UChar>(other) {}
+        inline UStr(const size_t count, const UChar ch) : std::basic_string<UChar>(count, ch) {}
+        inline UStr(const std::basic_string<UChar>& other) : std::basic_string<UChar>(other) {}
     };
 }

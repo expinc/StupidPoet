@@ -5,7 +5,7 @@ namespace StupidPoet
 {
     void Model::InsertNGram(const NGram& nGram)
     {
-        std::unordered_map<UStr, std::vector<NGram>>&    nGramMap = _inSentenceNGrams;
+        std::map<UStr, std::vector<NGram>>&    nGramMap = _inSentenceNGrams;
         if (NGramType::CrossSentence == nGram._type)
             nGramMap = _crossSentenceNGrams;
 
