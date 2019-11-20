@@ -17,7 +17,7 @@ namespace StupidPoet
 
     public:
         void    InsertNGram(const NGram& nGram);
-        void    LearnFromPoetry(const Poetry& poetry){}  // TODO
-        Json    ToJson(){return Json();} // TODO
+        void    LearnFromPoetry(const Poetry& poetry);
+        JsonDoc    ToJson(){return JsonDoc();} // TODO
     };
 }

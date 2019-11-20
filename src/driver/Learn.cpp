@@ -42,9 +42,9 @@ int main(int argc, const char* argv[])
     {
         model.LearnFromPoetry(*poetry);
     }
-    Json    modelJson = model.ToJson();
+    JsonDoc    modelJson = model.ToJson();
     UStr    modelFilePath = workPath + s_modelPath;
-    if ( WriteTextToFile(modelFilePath.c_str(), modelJson.ToString()) )
+    if ( WriteTextToFile(modelFilePath.c_str(), modelJson.toString().c_str()) )
         return EXIT_SUCCESS;
     else
         return EXIT_FAILURE;
