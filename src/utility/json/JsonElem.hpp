@@ -17,7 +17,7 @@ namespace StupidPoet
     class JsonArray;
 
 
-    class JsonElem
+    class JsonElem  // TODO
     {
     public:
         enum ElemType
@@ -46,53 +46,5 @@ namespace StupidPoet
 
     protected:
         JsonElem(GenericValue<UTF16<char16_t>>& elem, MemoryPoolAllocator<>& allocator);
-    };
-
-
-    class JsonTuple : public JsonElem
-    {
-    protected:
-        UStr    _name;
-
-    public:
-        const UStr& getName();
-
-    protected:
-        JsonTuple(
-            const UStr& name,
-            GenericValue<UTF16<char16_t>>& elem,
-            MemoryPoolAllocator<>& allocator);
-    };
-
-
-    class JsonArray : public JsonElem
-    {
-    public:
-        JsonElem    at(size_t index);
-
-    protected:
-        JsonArray(GenericValue<UTF16<char16_t>>& elem, MemoryPoolAllocator<>& allocator);
-    };
-
-
-    class JsonObject : public JsonElem
-    {
-    public:
-        JsonTuple   getMember(const UStr& name);
-
-    protected:
-        JsonObject(GenericValue<UTF16<char16_t>>& elem, MemoryPoolAllocator<>& allocator);
-    };
-
-
-    class JsonDoc : public JsonObject
-    {
-    private:
-        GenericDocument<UTF16<char16_t>>  _doc;
-
-    public:
-        JsonDoc();
-
-        UStr    toString();
     };
 }

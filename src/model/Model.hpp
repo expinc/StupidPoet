@@ -4,7 +4,7 @@
 #include <map>
 #include "NGram.hpp"
 #include "Poetry.hpp"
-#include "utility/Json.hpp"
+#include "utility/json/JsonDoc.hpp"
 
 
 namespace StupidPoet

@@ -8,7 +8,7 @@ set(StupidPoet_version_patch 0)
 include_directories(
     ${CMAKE_SOURCE_DIR}
     ../third-party/google-test/include
-    ../third-party/rapidjson-include
+    ../third-party/rapidjson
 )
 link_directories(../third-party/google-test/lib)
 
