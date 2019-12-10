@@ -1,23 +1,29 @@
 #pragma once
 
 
-#include "JsonElem.hpp"
+#include "JsonValue.hpp"
 
 
 namespace StupidPoet
 {
-    class JsonTuple : public JsonElem   // TODO
+    class JsonTuple : public JsonValue
     {
     protected:
         UStr    _name;
 
     public:
-        const UStr& getName();
+        inline const UStr& getName() const { return _name; }
 
     protected:
         JsonTuple(
-            const UStr& name,
-            GenericValue<UTF16<char16_t>>& elem,
-            MemoryPoolAllocator<>& allocator);
+            const UChar* name,
+            GenericValue<UTF16<char16_t>>& value,
+            MemoryPoolAllocator<>& allocator) :
+            JsonValue(value, allocator),
+            _name(name)
+        {}
+
+    friend class JsonObject;
+    friend class JsonDoc;
     };
 }

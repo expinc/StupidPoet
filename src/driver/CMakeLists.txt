@@ -3,4 +3,5 @@ set(learn_src
 add_executable(learn ${learn_src})
 target_link_libraries(learn
     infra
+    json
     model)
