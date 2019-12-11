@@ -33,15 +33,15 @@ namespace StupidPoet
         };
 
     protected:
-        static ValueType    getValueType(const GenericValue<UTF16<char16_t>>& rapidValue);
+        static ValueType    getValueType(const GenericValue<UTF16<UChar>>& rapidValue);
 
     protected:
-        GenericValue<UTF16<char16_t>>& _value;
+        GenericValue<UTF16<UChar>>& _value;
         MemoryPoolAllocator<>&  _allocator;
         ValueType  _valueType;
 
     public:
-        JsonValue(GenericValue<UTF16<char16_t>>& value, MemoryPoolAllocator<>& allocator) :
+        JsonValue(GenericValue<UTF16<UChar>>& value, MemoryPoolAllocator<>& allocator) :
             _value(value),
             _allocator(allocator),
             _valueType(getValueType(value))

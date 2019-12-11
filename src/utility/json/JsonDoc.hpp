@@ -9,7 +9,7 @@ namespace StupidPoet
     class JsonDoc : public JsonObjectInterface
     {
     private:
-        GenericDocument<UTF16<char16_t>>  _doc;
+        GenericDocument<UTF16<UChar>>  _doc;
 
     public:
         JsonDoc() { _doc.SetObject(); }

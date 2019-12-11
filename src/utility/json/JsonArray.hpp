@@ -23,7 +23,7 @@ namespace StupidPoet
         JsonArray& operator=(const JsonArray& other);
 
     protected:
-        JsonArray(GenericValue<UTF16<char16_t>>& value, MemoryPoolAllocator<>& allocator) :
+        JsonArray(GenericValue<UTF16<UChar>>& value, MemoryPoolAllocator<>& allocator) :
             JsonValue(value, allocator),
             _elemType(getValueType(*(value.Begin())))
         {}

@@ -7,7 +7,7 @@
 
 namespace StupidPoet
 {
-    JsonValue::ValueType JsonValue::getValueType(const GenericValue<UTF16<char16_t>>& rapidValue)
+    JsonValue::ValueType JsonValue::getValueType(const GenericValue<UTF16<UChar>>& rapidValue)
     {
         switch (rapidValue.GetType())
         {

@@ -18,7 +18,7 @@ namespace StupidPoet
         void    addMember(const UChar* name, const JsonValue& value) override;
 
     protected:
-        JsonObject(GenericValue<UTF16<char16_t>>& value, MemoryPoolAllocator<>& allocator) :
+        JsonObject(GenericValue<UTF16<UChar>>& value, MemoryPoolAllocator<>& allocator) :
             JsonValue(value, allocator)
         {}
 

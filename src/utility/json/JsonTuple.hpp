@@ -17,7 +17,7 @@ namespace StupidPoet
     protected:
         JsonTuple(
             const UChar* name,
-            GenericValue<UTF16<char16_t>>& value,
+            GenericValue<UTF16<UChar>>& value,
             MemoryPoolAllocator<>& allocator) :
             JsonValue(value, allocator),
             _name(name)
