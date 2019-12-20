@@ -5,3 +5,7 @@ set(json_src
     JsonValue.cpp
 )
 add_library(json STATIC ${json_src})
+target_link_libraries(json
+    infra)
+
+add_subdirectory(test)
