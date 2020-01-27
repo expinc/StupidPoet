@@ -15,13 +15,15 @@ include_directories(
     ../third-party/rapidjson
 )
 link_directories(
-    ../third-party/google-test/bin
     ../third-party/google-test/lib
 )
 
 
 set(CMAKE_DEBUG_POSTFIX d)
-set_property(TARGET PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreadedDLL")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/gen)
+if (MSVC)
+    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreadedDLL")
+endif (MSVC)
 
 
 add_subdirectory(driver)

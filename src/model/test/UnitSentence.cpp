@@ -77,11 +77,4 @@ namespace StupidPoet
         _ordinary->Append(u'三');
         EXPECT_EQ(u'三', _ordinary->At(originLength));
     }
-
-
-    int main(int argc, char* argv[])
-    {
-        InitGoogleTest(&argc, argv);
-        return RUN_ALL_TESTS();
-    }
 }

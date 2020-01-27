@@ -3,8 +3,8 @@ set (UnitSentence_src
 )
 add_executable(UnitSentence ${UnitSentence_src})
 target_link_libraries(UnitSentence
-    gtest.dll
-    gtest_main.dll
+    gtest.lib
+    gtest_main.lib
     model)
 
 
@@ -13,6 +13,6 @@ set (UnitPoetry_src
 )
 add_executable(UnitPoetry ${UnitPoetry_src})
 target_link_libraries(UnitPoetry
-    gtest.dll
-    gtest_main.dll
+    gtest.lib
+    gtest_main.lib
     model)
