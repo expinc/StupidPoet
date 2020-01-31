@@ -20,6 +20,10 @@ namespace StupidPoet
 
     class JsonValue
     {
+        friend class JsonArray;
+        friend class JsonDoc;
+        friend class JsonObject;
+
     public:
         enum ValueType
         {
@@ -28,25 +32,26 @@ namespace StupidPoet
             Int,
             Double,
             Str,
-            Object,
-            Array
+            Array,
+            Object
         };
 
     protected:
         static ValueType    getValueType(const GenericValue<UTF16<UChar>>& rapidValue);
 
     protected:
-        GenericValue<UTF16<UChar>>& _value;
-        MemoryPoolAllocator<>&  _allocator;
+        GenericValue<UTF16<UChar>>* _value;
+        MemoryPoolAllocator<>*  _allocator;
         ValueType  _valueType;
 
     public:
-        JsonValue(GenericValue<UTF16<UChar>>& value, MemoryPoolAllocator<>& allocator) :
+        JsonValue(GenericValue<UTF16<UChar>>* value, MemoryPoolAllocator<>* allocator) :
             _value(value),
             _allocator(allocator),
-            _valueType(getValueType(value))
+            _valueType(getValueType(*value))
         {}
 
+        inline bool         isValid() const { return _value && _allocator; }
         inline ValueType    getType() const { return _valueType; }
 
         bool        getBool();
@@ -55,9 +60,5 @@ namespace StupidPoet
         UStr        getStr();
         JsonArray   getArray();
         JsonObject  getObject();
-
-    friend class JsonArray;
-    friend class JsonDoc;
-    friend class JsonObject;
     };
 }

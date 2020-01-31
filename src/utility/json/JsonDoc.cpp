@@ -3,17 +3,11 @@
 
 namespace StupidPoet
 {
-    void JsonDoc::addMember(const UChar* name, const UChar* value)
+    JsonDoc::JsonDoc() :
+        JsonObject(&_doc, &_doc.GetAllocator())
     {
-        GenericStringRef<UChar> valueStr(value);
-        this->addMember_T(name, valueStr);
-    }
-
-
-    void JsonDoc::addMember(const UChar* name, const JsonValue& value)
-    {
-        GenericStringRef<UChar> nameStr(name);
-        _doc.AddMember(nameStr, value._value, _doc.GetAllocator());
+        _doc.SetObject();
+        _allocator = &_doc.GetAllocator();
     }
 
 

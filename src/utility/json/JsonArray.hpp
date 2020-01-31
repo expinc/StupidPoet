@@ -8,26 +8,31 @@ namespace StupidPoet
 {
     class JsonArray : public JsonValue
     {
-    protected:
-        ValueType    _elemType;
+        friend class JsonValue;
+        friend class JsonObject;
 
     public:
-        inline JsonValue    at(size_t index) { return JsonValue(_value[index], _allocator); }
+        inline JsonValue    at(size_t index) { return JsonValue(&_value[index], _allocator); }
 
-        bool    pushBack(const bool value);
-        bool    pushBack(const int value);
-        bool    pushBack(const double value);
-        bool    pushBack(const UStr& value);
-        bool    pushBack(const JsonValue& value);
+        inline bool pushBack(const bool value) { return pushBack_T(value); }
+        inline bool pushBack(const int value) { return pushBack_T(value); }
+        inline bool pushBack(const double value) { return pushBack_T(value); }
+        bool        pushBack(const UStr& value);
+        bool        pushBack(const JsonValue& value);
 
         JsonArray& operator=(const JsonArray& other);
 
     protected:
-        JsonArray(GenericValue<UTF16<UChar>>& value, MemoryPoolAllocator<>& allocator) :
-            JsonValue(value, allocator),
-            _elemType(getValueType(*(value.Begin())))
+        JsonArray(GenericValue<UTF16<UChar>>* value, MemoryPoolAllocator<>* allocator) :
+            JsonValue(value, allocator)
         {}
 
-        friend class JsonValue;
+    private:
+        template<typename type>
+        bool    pushBack_T(const type& value)
+        {
+            _value->PushBack(value, *_allocator);
+            return true;
+        }
     };
 }
