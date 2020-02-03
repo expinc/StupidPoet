@@ -16,7 +16,9 @@ namespace StupidPoet
         JsonDoc();
         // TODO: copy and assignment
 
-        UStr    toString();
+        UStr        toString();
+        inline void fromString(const UChar* str) { _doc.Parse(str); }
+
         inline MemoryPoolAllocator<>&   getAllocator() { return _doc.GetAllocator(); }
     };
 }

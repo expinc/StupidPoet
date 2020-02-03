@@ -49,7 +49,7 @@ namespace StupidPoet
     }
 
 
-    bool JsonValue::getBool()
+    bool JsonValue::getBool() const
     {
         if (ValueType::Bool != _valueType)
             throw UtilityException(JSON_ERROR_WRONG_TYPE);
@@ -58,7 +58,7 @@ namespace StupidPoet
     }
 
 
-    int JsonValue::getInt()
+    int JsonValue::getInt() const
     {
         if (ValueType::Int != _valueType)
             throw UtilityException(JSON_ERROR_WRONG_TYPE);
@@ -67,7 +67,7 @@ namespace StupidPoet
     }
 
 
-    double JsonValue::getDouble()
+    double JsonValue::getDouble() const
     {
         if (ValueType::Double != _valueType)
             throw UtilityException(JSON_ERROR_WRONG_TYPE);
@@ -76,7 +76,7 @@ namespace StupidPoet
     }
 
 
-    UStr JsonValue::getStr()
+    UStr JsonValue::getStr() const
     {
         if (ValueType::Str != _valueType)
             throw UtilityException(JSON_ERROR_WRONG_TYPE);
@@ -85,7 +85,7 @@ namespace StupidPoet
     }
 
 
-    JsonArray JsonValue::getArray()
+    JsonArray JsonValue::getArray() const
     {
         if (ValueType::Array != _valueType)
             throw UtilityException(JSON_ERROR_WRONG_TYPE);
@@ -94,7 +94,7 @@ namespace StupidPoet
     }
 
 
-    JsonObject JsonValue::getObject()
+    JsonObject JsonValue::getObject() const
     {
         if (ValueType::Object != _valueType)
             throw UtilityException(JSON_ERROR_WRONG_TYPE);

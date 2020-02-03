@@ -54,11 +54,12 @@ namespace StupidPoet
         inline bool         isValid() const { return _value && _allocator; }
         inline ValueType    getType() const { return _valueType; }
 
-        bool        getBool();
-        int         getInt();
-        double      getDouble();
-        UStr        getStr();
-        JsonArray   getArray();
-        JsonObject  getObject();
+        bool        getBool() const;
+        int         getInt() const;
+        double      getDouble() const;
+        UStr        getStr() const;
+        JsonArray   getArray() const;
+        JsonObject  getObject() const;
+        inline bool isNull() const { return ValueType::Null == _valueType; }
     };
 }

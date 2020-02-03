@@ -11,6 +11,7 @@ namespace StupidPoet
     class JsonObject : public JsonValue, public JsonObjectInterface
     {
     public:
+        inline bool hasMember(const UChar* name) override { return _value->HasMember(name); }
         JsonTuple   getMember(const UChar* name) override;
 
         inline void addMemberValue(const UChar* name, bool value) override { addMemberValue_T<bool>(name, value); }

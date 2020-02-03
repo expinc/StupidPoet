@@ -12,7 +12,8 @@ namespace StupidPoet
         friend class JsonObject;
 
     public:
-        inline JsonValue    at(size_t index) { return JsonValue(&_value[index], _allocator); }
+        inline JsonValue    at(size_t index) const { return JsonValue(&((*_value)[index]), _allocator); }
+        inline size_t       size() const { return _value->Size(); }
 
         inline bool pushBack(const bool value) { return pushBack_T(value); }
         inline bool pushBack(const int value) { return pushBack_T(value); }
