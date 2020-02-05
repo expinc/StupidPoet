@@ -45,11 +45,7 @@ namespace StupidPoet
         ValueType  _valueType;
 
     public:
-        JsonValue(GenericValue<UTF16<UChar>>* value, MemoryPoolAllocator<>* allocator) :
-            _value(value),
-            _allocator(allocator),
-            _valueType(getValueType(*value))
-        {}
+        JsonValue(GenericValue<UTF16<UChar>>* value, MemoryPoolAllocator<>* allocator);
 
         inline bool         isValid() const { return _value && _allocator; }
         inline ValueType    getType() const { return _valueType; }

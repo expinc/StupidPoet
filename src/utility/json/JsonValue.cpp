@@ -10,6 +10,17 @@ namespace StupidPoet
     #define JSON_ERROR_WRONG_TYPE   u"Wrong json value type!"
 
 
+    JsonValue::JsonValue(GenericValue<UTF16<UChar>>* value, MemoryPoolAllocator<>* allocator) :
+        _value(value),
+        _allocator(allocator)
+    {
+        if (this->isValid())
+            _valueType = getValueType(*value);
+        else
+            _valueType = ValueType::Null;
+    }
+
+
     JsonValue::ValueType JsonValue::getValueType(const GenericValue<UTF16<UChar>>& rapidValue)
     {
         switch (rapidValue.GetType())

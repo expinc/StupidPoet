@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <memory>
 #include "utility/json/JsonDoc.hpp"
 
 
@@ -65,5 +66,19 @@ namespace StupidPoet
         JsonDoc emptyDoc;
         emptyDoc.fromString(u"{}");
         ASSERT_EQ(u"{}", emptyDoc.toString());
+    }
+
+
+    TEST(TestJsonDoc, copyAndAssign)
+    {
+        auto    originDoc = std::make_unique<JsonDoc>();
+        originDoc->fromString(s_jsonOrdinary);
+
+        JsonDoc copiedDoc(*originDoc);
+        JsonDoc assignedDoc = *originDoc;
+
+        originDoc.reset();
+        EXPECT_EQ(s_jsonOrdinary, copiedDoc.toString());
+        EXPECT_EQ(s_jsonOrdinary, assignedDoc.toString());
     }
 }

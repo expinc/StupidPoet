@@ -4,10 +4,20 @@
 namespace StupidPoet
 {
     JsonDoc::JsonDoc() :
-        JsonObject(&_doc, &_doc.GetAllocator())
+        JsonObject(nullptr, nullptr)
     {
         _doc.SetObject();
+        _value = &_doc;
         _allocator = &_doc.GetAllocator();
+    }
+
+
+    JsonDoc& JsonDoc::operator=(const JsonDoc& other)
+    {
+        _doc.CopyFrom(other._doc, _doc.GetAllocator());
+        _value = &_doc;
+        _allocator = &_doc.GetAllocator();
+        return *this;
     }
 
 
