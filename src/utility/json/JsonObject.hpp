@@ -10,6 +10,9 @@ namespace StupidPoet
 {
     class JsonObject : public JsonValue, public JsonObjectInterface
     {
+        friend class JsonValue;
+        friend class JsonArray;
+
     public:
         inline bool hasMember(const UChar* name) override { return _value->HasMember(name); }
         JsonTuple   getMember(const UChar* name) override;
@@ -34,7 +37,5 @@ namespace StupidPoet
             GenericStringRef<UChar> nameStr(name);
             _value->AddMember(nameStr, value, *_allocator);
         }
-
-        friend class JsonValue;
     };
 }

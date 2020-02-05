@@ -20,6 +20,7 @@ namespace StupidPoet
         inline bool pushBack(const double value) { return pushBack_T(value); }
         bool        pushBack(const UStr& value);
         bool        pushBack(const JsonValue& value);
+        JsonObject  appendObject();
 
         JsonArray& operator=(const JsonArray& other);
 

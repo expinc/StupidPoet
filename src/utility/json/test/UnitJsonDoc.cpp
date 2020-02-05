@@ -8,7 +8,7 @@ using namespace testing;
 
 namespace StupidPoet
 {
-    static UChar*   s_jsonOrdinary = u"{\"fuck\":true,\"shit\":[1,2,3],\"butt\":{\"suck\":\"锤子\"},\"nothing\":null}";
+    static UChar*   s_jsonOrdinary = u"{\"fuck\":true,\"shit\":[1,2,3,{\"damn\":4}],\"butt\":{\"suck\":\"锤子\"},\"nothing\":null}";
 
 
     TEST(TestJsonDoc, writeToString)
@@ -21,6 +21,8 @@ namespace StupidPoet
         shit.pushBack(1);
         shit.pushBack(2);
         shit.pushBack(3);
+        auto    object = shit.appendObject();
+        object.addMemberValue(u"damn", 4);
 
         auto    butt = doc.addMemberObject(u"butt");
         butt.addMemberValue(u"suck", u"锤子");
@@ -44,10 +46,13 @@ namespace StupidPoet
 
         ASSERT_TRUE(doc.hasMember(u"shit"));
         auto    shit = doc.getMember(u"shit").getArray();
-        EXPECT_EQ(3u, shit.size());
+        EXPECT_EQ(4u, shit.size());
         EXPECT_EQ(1, shit.at(0).getInt());
         EXPECT_EQ(2, shit.at(1).getInt());
         EXPECT_EQ(3, shit.at(2).getInt());
+        auto    damn = shit.at(3).getObject();
+        ASSERT_TRUE(damn.hasMember(u"damn"));
+        EXPECT_EQ(4, damn.getMember(u"damn").getInt());
 
         ASSERT_TRUE(doc.hasMember(u"butt"));
         auto    butt = doc.getMember(u"butt").getObject();
