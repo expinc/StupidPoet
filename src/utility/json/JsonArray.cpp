@@ -7,8 +7,8 @@ namespace StupidPoet
 
     bool JsonArray::pushBack(const UStr& value)
     {
-        GenericStringRef<UChar> str(value.c_str());
-        _value->PushBack(str, *_allocator);
+        GenericValue<UTF16<UChar>>  valueStr(value.c_str(), *_allocator);
+        _value->PushBack(valueStr, *_allocator);
         return true;
     }
 

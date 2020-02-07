@@ -34,7 +34,7 @@ namespace StupidPoet
         template<typename type>
         void    addMemberValue_T(const UChar* name, const type& value)
         {
-            GenericStringRef<UChar> nameStr(name);
+            GenericValue<UTF16<UChar>>  nameStr(name, *_allocator);
             _value->AddMember(nameStr, value, *_allocator);
         }
     };

@@ -25,7 +25,12 @@ namespace StupidPoet
         object.addMemberValue(u"damn", 4);
 
         auto    butt = doc.addMemberObject(u"butt");
-        butt.addMemberValue(u"suck", u"锤子");
+        auto    suckStr = std::make_shared<UStr>(u"suck");
+        auto    czStr = std::make_shared<UStr>(u"锤子");
+        butt.addMemberValue(suckStr->c_str(), czStr->c_str());
+        // Dispose strings to test string deep copy
+        suckStr.reset();
+        czStr.reset();
 
         doc.addMemberNull(u"nothing");
 
