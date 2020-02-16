@@ -9,6 +9,9 @@ namespace StupidPoet
 {
     class Poetry
     {
+    public:
+        static inline bool  isValidChar(UChar ch) { return UCharAuxiliary::isChinese(ch); }
+
     private:
         std::vector<Sentence> _sentences;
 

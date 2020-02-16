@@ -9,7 +9,14 @@ namespace StupidPoet
     typedef char16_t    UChar;
 
 
-    class UStr : public std::basic_string<UChar>
+    class UCharAuxiliary final
+    {
+    public:
+        static bool isChinese(UChar ch) { return ch >= 0x4e00 && ch <= 0x9fff; }
+    };
+
+
+    class UStr final : public std::basic_string<UChar>
     {
     public:
         static UStr fromUtf8(const char* utf8);
