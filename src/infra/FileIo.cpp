@@ -12,7 +12,7 @@ namespace StupidPoet
         // Open file
         std::string pathUtf8 = UStr::toUtf8(path);
         FILE*   file = fopen(pathUtf8.c_str(), "rb");
-        if (nullptr == path)
+        if (nullptr == file)
             return false;
 
         // Read file
