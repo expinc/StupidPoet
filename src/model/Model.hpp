@@ -18,6 +18,9 @@ namespace StupidPoet
     public:
         void    InsertNGram(const NGram& nGram);
         void    LearnFromPoetry(const Poetry& poetry);
-        JsonDoc    ToJson(){return JsonDoc();} // TODO
+        std::shared_ptr<JsonDoc>    ToJson();
+
+    private:
+        void    nGramMapIntoJsonArray(const std::map<UStr, std::vector<NGram>>& nGramMap, JsonArray& jsonArray);
     };
 }

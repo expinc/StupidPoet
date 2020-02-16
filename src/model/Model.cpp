@@ -5,17 +5,17 @@ namespace StupidPoet
 {
     void Model::InsertNGram(const NGram& nGram)
     {
-        std::map<UStr, std::vector<NGram>>&    nGramMap = _inSentenceNGrams;
+        std::map<UStr, std::vector<NGram>>*    nGramMap = &_inSentenceNGrams;
         if (NGramType::CrossSentence == nGram._type)
-            nGramMap = _crossSentenceNGrams;
+            nGramMap = &_crossSentenceNGrams;
 
         UStr    prefix = nGram.GetPrefix();
-        auto tuple = nGramMap.find(prefix);
-        if (nGramMap.end() == tuple)
+        auto tuple = nGramMap->find(prefix);
+        if (nGramMap->end() == tuple)
         {
             std::vector<NGram>  nGramList;
             nGramList.push_back(nGram);
-            nGramMap.insert( std::make_pair<UStr, std::vector<NGram>>(std::move(prefix), std::move(nGramList)) );
+            nGramMap->insert( std::make_pair<UStr, std::vector<NGram>>(std::move(prefix), std::move(nGramList)) );
         }
         else
         {
@@ -63,13 +63,46 @@ namespace StupidPoet
                 }
 
                 // CrossSentence 2-gram
-                if (i > 0)
+                if (i > 0 && poetry[i - 1].Size() > j)
                 {
                     NGram   crossTwoGram(2, NGramType::CrossSentence);
                     crossTwoGram._content[0] = poetry[i - 1][j];
                     crossTwoGram._content[1] = poetry[i][j];
                     crossTwoGram._occurance = 1;
                     InsertNGram(crossTwoGram);
+                }
+            }
+        }
+    }
+
+
+    std::shared_ptr<JsonDoc> Model::ToJson()
+    {
+        auto    json = std::make_shared<JsonDoc>();
+        auto    nGrams = json->addMemberArray(u"N-grams");
+        nGramMapIntoJsonArray(_inSentenceNGrams, nGrams);
+        nGramMapIntoJsonArray(_crossSentenceNGrams, nGrams);
+        return json;
+    }
+
+
+    void Model::nGramMapIntoJsonArray(const std::map<UStr, std::vector<NGram>>& nGramMap, JsonArray& jsonArray)
+    {
+        if (jsonArray.isValid())
+        {
+            for (const auto entry : nGramMap)
+            {
+                for (const auto& nGram : entry.second)
+                {
+                    auto    object = jsonArray.appendObject();
+                    object.addMemberValue(u"content", nGram._content.c_str());
+                    object.addMemberValue(u"occurance", (int)nGram._occurance);
+                    UStr    type;
+                    if (NGramType::InSentence == nGram._type)
+                        type.assign(u"I");
+                    else
+                        type.assign(u"C");
+                    object.addMemberValue(u"type", type.c_str());
                 }
             }
         }
