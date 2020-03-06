@@ -13,7 +13,7 @@
 using namespace StupidPoet;
 
 #ifdef _WIN32
-static UStr s_modelPath(u"data\\model.json");
+static UStr s_modelPath(u"model.json");
 #endif
 
 
@@ -56,5 +56,8 @@ int main(int argc, const char* argv[])
     if ( WriteTextToFile(modelFilePath.c_str(), modelJson->toString().c_str()) )
         return EXIT_SUCCESS;
     else
+    {
+        std::cerr << "Failed to write model file!" << std::endl;
         return EXIT_FAILURE;
+    }
 }

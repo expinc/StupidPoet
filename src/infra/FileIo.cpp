@@ -44,16 +44,17 @@ namespace StupidPoet
 
         std::string pathUtf8 = UStr::toUtf8(path);
         std::string contentUtf8 = UStr::toUtf8(content);
-        FILE*   file = fopen(pathUtf8.c_str(), "wb");
+        FILE*   file = fopen(pathUtf8.c_str(), "wb+");
         if (nullptr != file)
         {
             int error = fputs(contentUtf8.c_str(), file);
             fclose(file);
             file = nullptr;
-            if (EOF == error)
-                return false;
+            if (EOF != error)
+                return true;
         }
-        return true;
+
+        return false;
     }
 
 
